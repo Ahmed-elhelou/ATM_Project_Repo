@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.*;
 
+//adding some test notes
 public class FinalProject {
 
     public static void main(String[] args) throws java.io.IOException {
@@ -43,6 +44,10 @@ class BankAccount {
     }
 
     public double getBalance() {
+        return this.balance;
+    }
+
+    public double test() {
         return this.balance;
     }
 
