@@ -1,0 +1,7 @@
+Account number:01 PIN:0101 login (java.util.date)
+Account number:01 PIN:0101 checkingAccount deposite Amount:1000.0 currentBalance:1000.0 (java.util.date)
+Account number:01 PIN:0101 checkingAccount withdrawal Amount 400.0 currentBalance:600.0 (java.util.date)
+Account number:01 PIN:0101 printAccountSummary (java.util.date)
+Account number:01 PIN:0101 logout (java.util.date)
+Account number:02 PIN:0202 login (java.util.date)
+Account number:02 PIN:0202 logout (java.util.date)
