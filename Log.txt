@@ -1,17 +1,17 @@
-Account number 01 'L' login Wed Mar 24 08:24:37 EET 2021
-Account number 01 'D' checkingAccount deposite Amount 1000.0 currentBalance 1000.0 Wed Mar 24 08:24:37 EET 2021
-Account number 01 'W' checkingAccount withdrawal Amount 400.0 currentBalance 600.0 Wed Mar 24 08:24:37 EET 2021
-Account number 01 'P' requested account summary Wed Mar 24 08:24:37 EET 2021
-Account number 01 'Q' logout Wed Mar 24 08:24:37 EET 2021
-Account number 02 'A' login-Attempt Wed Mar 24 08:24:37 EET 2021
-Account number 02 'F' failed-login Wed Mar 24 08:24:37 EET 2021
-Account number 02 'A' login-Attempt Wed Mar 24 08:24:37 EET 2021
-Account number 02 'L' successful-login Wed Mar 24 08:24:37 EET 2021
-Account number 02 'C' Accessed checking account Wed Mar 24 08:24:37 EET 2021
-Account number 02 'B' went back to accounts screen Wed Mar 24 08:24:37 EET 2021
-Account number 02 'S' Accessed saving account Wed Mar 24 08:24:37 EET 2021
-Account number 01 'D' checkingAccount deposite Amount 1000.0 currentBalance 1000.0 Wed Mar 24 08:24:37 EET 2021
-Account number 02 'S' Accessed saving account Wed Mar 24 08:24:37 EET 2021
-Account number 02 'X' made a print deposites request Wed Mar 24 08:24:37 EET 2021
-Account number 02 'Y' made a print withdrawals request Wed Mar 24 08:24:37 EET 2021
-Account number 02 'Z' made a print all customer activities request Wed Mar 24 08:24:37 EET 2021
+Account number 01 L login Wed Mar 24 08:24:37 EET 2021
+Account number 01 D checkingAccount deposite Amount 1000.0 currentBalance 1000.0 Wed Mar 24 08:24:37 EET 2021
+Account number 01 W checkingAccount withdrawal Amount 400.0 currentBalance 600.0 Wed Mar 24 08:24:37 EET 2021
+Account number 01 P requested account summary Wed Mar 24 08:24:37 EET 2021
+Account number 01 Q logout Wed Mar 24 08:24:37 EET 2021
+Account number 02 A login-Attempt Wed Mar 24 08:24:37 EET 2021
+Account number 02 F failed-login Wed Mar 24 08:24:37 EET 2021
+Account number 02 A login-Attempt Wed Mar 24 08:24:37 EET 2021
+Account number 02 L successful-login Wed Mar 24 08:24:37 EET 2021
+Account number 02 C Accessed checking account Wed Mar 24 08:24:37 EET 2021
+Account number 02 B went back to accounts screen Wed Mar 24 08:24:37 EET 2021
+Account number 02 S Accessed saving account Wed Mar 24 08:24:37 EET 2021
+Account number 01 D checkingAccount deposite Amount 1000.0 currentBalance 1000.0 Wed Mar 24 08:24:37 EET 2021
+Account number 02 S Accessed saving account Wed Mar 24 08:24:37 EET 2021
+Account number 02 X made a print deposites request Wed Mar 24 08:24:37 EET 2021
+Account number 02 Y made a print withdrawals request Wed Mar 24 08:24:37 EET 2021
+Account number 02 Z made a print all customer activities request Wed Mar 24 08:24:37 EET 2021
