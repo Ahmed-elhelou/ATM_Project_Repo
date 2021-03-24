@@ -348,7 +348,7 @@ class ATM {
         String[] stringContent = s.split(" ");
         String accountNumber = stringContent[3];
         String date = "";
-        char activityType = Character.toLowerCase(s.charAt(19));
+        char activityType = Character.toLowerCase(s.charAt(18));
         switch (activityType) {
         case 'a':
             for (int i = 4; i < 10; i++) {
