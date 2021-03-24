@@ -61,10 +61,13 @@ class BankAccount {
         return this.balance;
     }
 
+<<<<<<< HEAD
     public void setBalance(double balance) {
         this.balance = balance;
     }
 
+=======
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
 }
 
 class Customer {
@@ -186,7 +189,11 @@ class ATM {
             System.out.print("Enter customer ID : ");
             this.currentNumber = this.input.next();
             this.setState(ATM.PIN);
+<<<<<<< HEAD
             this.logArray.add(new Activity('A', "" + this.currentNumber));
+=======
+            this.logArray.add(new Activity('A', ""+this.currentNumber));
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
             break;
         case ATM.PIN:
             System.out.print("Enter PIN: ");
@@ -194,7 +201,10 @@ class ATM {
             this.currentCustomer = this.currentBank.getCustomer(currentPIN, currentNumber);
             if (this.currentCustomer != null) {
                 this.setState(ATM.ACCOUNT);
+<<<<<<< HEAD
 
+=======
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 this.currentNumber = this.currentCustomer.getNumber();
                 currentActivity = new Activity('L', this.currentNumber);
                 this.logArray.add(currentActivity);
@@ -212,12 +222,17 @@ class ATM {
                 this.currentAccount = this.currentCustomer.getCheckingAcount();
                 currentAccountType = "checking";
                 this.state = ATM.TRANSACT;
+<<<<<<< HEAD
                 this.logArray.add(new Activity('C', "" + this.currentNumber));
+=======
+                this.logArray.add(new Activity('C', ""+this.currentNumber));
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 break;
             case 'b':
                 this.currentAccount = this.currentCustomer.getSavingAcount();
                 currentAccountType = "saving";
                 this.state = ATM.TRANSACT;
+<<<<<<< HEAD
                 this.logArray.add(new Activity('S', "" + this.currentNumber));
                 break;
             case 'c':
@@ -229,6 +244,18 @@ class ATM {
                 break;
             case 'd':
                 this.logArray.add(new Activity('Q', "" + this.currentNumber));
+=======
+                this.logArray.add(new Activity('S', ""+this.currentNumber));
+                break;
+            case 'c':
+                this.state = ATM.SUMMARY;
+                //this is not needed, since the next state (SUMMARY) gives options on what to print
+                //this.currentCustomer.printSummary();
+                this.logArray.add(new Activity('P', ""+this.currentNumber));
+                break;
+            case 'd':
+                this.logArray.add(new Activity('Q', ""+this.currentNumber));
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 this.state = ATM.START;
                 this.currentCustomer = null;
                 this.currentAccount = null;
@@ -238,7 +265,11 @@ class ATM {
                 break;
             }
             break;
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         case ATM.TRANSACT:
 
             System.out.println("Current Balance = " + this.currentAccount.getBalance());
@@ -250,6 +281,7 @@ class ATM {
                 System.out.print("Amount: ");
                 amount = this.input.nextDouble();
                 currentAccount.deposits(amount);
+<<<<<<< HEAD
 
                 currentActivity = new Transaction('D', currentCustomer, amount, currentAccount.getBalance(),
                         currentAccountType);
@@ -258,6 +290,14 @@ class ATM {
                 // this.currentAccount = null; //this line throws an exception
                 this.state = ATM.TRANSACT; // instead of going to account state, it should stay in transact state until
                                            // the user chooses 'back'
+=======
+                currentActivity = new Transaction('D', this.currentCustomer, amount, this.currentAccount.getBalance(),
+                        this.currentAccountType);
+                this.currentCustomer.addActivity(currentActivity);
+                this.logArray.add(currentActivity);
+                this.currentAccount = null;
+                this.state = ATM.TRANSACT; //instead of going to account state, it should stay in transact state until the user chooses 'back'
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 break;
             case 'b':
                 System.out.print("Amount: ");
@@ -267,24 +307,39 @@ class ATM {
                         this.currentAccountType);
                 this.currentCustomer.addActivity(currentActivity);
                 this.logArray.add(currentActivity);
+<<<<<<< HEAD
                 // this.currentAccount = null; //this line throws an exception too
                 this.state = ATM.TRANSACT; // same thing here
                 break;
             case 'c':
                 // search the customer's arraylist of activities using currentAccountType and
                 // print all the found activities in this bankaccount
+=======
+                this.currentAccount = null;
+                this.state = ATM.TRANSACT; //same thing here
+                break;
+            case 'c':
+                //search the customer's arraylist of activities using currentAccountType and print all the found activities in this bankaccount
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 ArrayList<Activity> customerActivity = currentCustomer.getTransactionsList();
                 for (Activity element : customerActivity) {
                     if (element.toString().contains(this.currentAccountType + " account")) {
                         System.out.println(element.toString());
+<<<<<<< HEAD
                     } else {
                         System.out.println("noo");
+=======
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                     }
                 }
                 break;
             case 'd':
                 this.state = ATM.ACCOUNT;
+<<<<<<< HEAD
                 this.logArray.add(new Activity('B', "" + this.currentCustomer.getNumber()));
+=======
+                this.logArray.add(new Activity('B', ""+this.currentCustomer.getNumber()));
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 break;
             }
             break;
@@ -297,15 +352,23 @@ class ATM {
             case 'a':
                 for (int i = 0; i < customerActivitiesArray.size(); i++) {
                     if (customerActivitiesArray.get(i).getType() == 'd') {
+<<<<<<< HEAD
                         customerActivitiesArray.get(i).toString();
                     }
                 }
                 this.logArray.add(new Activity('X', "" + this.currentCustomer.getNumber()));
+=======
+                     customerActivitiesArray.get(i).toString();
+                    }
+                }
+                this.logArray.add(new Activity('X', ""+this.currentCustomer.getNumber()));
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 break;
 
             case 'b':
                 for (int i = 0; i < customerActivitiesArray.size(); i++) {
                     if (customerActivitiesArray.get(i).getType() == 'w') {
+<<<<<<< HEAD
                         customerActivitiesArray.get(i).toString();
                     }
                 }
@@ -327,18 +390,45 @@ class ATM {
                 for (Activity element : logArray) {
                     activityString = element.toString().split(" ");
                     if (activityString[2].equals("" + this.currentCustomer.getNumber())) {
+=======
+                     customerActivitiesArray.get(i).toString();
+                    }
+                }
+                this.logArray.add(new Activity('Y', ""+this.currentCustomer.getNumber()));
+                break;
+
+            case 'c':
+                this.logArray.add(new Activity('Z', ""+this.currentCustomer.getNumber()));
+                //instead of just searching through the customer's transactions, if the customer wants a full activity summary
+                //we should get it from the logArray 
+                // for (int i = 0; i < customerActivitiesArray.size(); i++) {
+                //     customerActivitiesArray.get(i).toString();
+                // }
+                // break;
+
+                //search the logArray and get all activities related to this customer
+                String[] activityString;
+                for (Activity element : logArray) {
+                    activityString = element.toString().split(" ");
+                    if (activityString[2].equals(""+this.currentCustomer.getNumber())) {
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                         System.out.println(element.toString());
                     }
                 }
 
             case 'd':
                 this.state = ATM.ACCOUNT;
+<<<<<<< HEAD
                 this.logArray.add(new Activity('B', "" + this.currentCustomer.getNumber()));
+=======
+                this.logArray.add(new Activity('B', ""+this.currentCustomer.getNumber()));
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                 break;
             }
 
             break;
         }
+        
 
     }
 
@@ -352,6 +442,7 @@ class ATM {
     }
 
     public void saveLog() throws FileNotFoundException {
+<<<<<<< HEAD
         // i need a way to delete the content of the file before i re-write the logArray
         // into the logFile
         // i thought about deleting the file and creating a new one but maybe you know a
@@ -360,6 +451,13 @@ class ATM {
         // logFile.mkdirs();
         // i also thought about replacing the content of the logFile with "" instead of
         // deleting the file
+=======
+        //i need a way to delete the content of the file before i re-write the logArray into the logFile
+        //i thought about deleting the file and creating a new one but maybe you know a better way? 
+        //logFile.delete();
+        //logFile.mkdirs();
+        //i also thought about replacing the content of the logFile with "" instead of deleting the file
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         try (PrintWriter logWriter = new PrintWriter(logFile)) {
             int count = 0;
             while (count < this.logArray.size()) {
@@ -383,7 +481,11 @@ class ATM {
         case 'f':
             for (int i = 4; i < 10; i++) {
                 date += stringContent[i] + " ";
+<<<<<<< HEAD
             }
+=======
+            }   
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
             return new Activity('F', accountNumber, date);
 
         case 'c':
@@ -428,14 +530,23 @@ class ATM {
                 date += stringContent[i] + " ";
             }
             return new Transaction('W', this.currentCustomer, Double.parseDouble(stringContent[7]),
+<<<<<<< HEAD
                     Double.parseDouble(stringContent[9]), stringContent[4], date);
 
+=======
+            Double.parseDouble(stringContent[9]), stringContent[4], date);
+        
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         case 'x':
             for (int i = 9; i < 15; i++) {
                 date += stringContent[i] + " ";
             }
             return new Activity('X', accountNumber);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         case 'y':
             for (int i = 9; i < 15; i++) {
                 date += stringContent[i] + " ";
@@ -454,16 +565,25 @@ class Transaction extends Activity {
     private Customer currentCustomer;
 
     public Transaction(char type, Customer currentCustomer, double amount, double balance, String accountType) {
+<<<<<<< HEAD
         super(type, "" + currentCustomer.getNumber());
+=======
+        super(type, ""+currentCustomer.getNumber());
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         this.amount = amount;
         this.currentBalance = balance;
         this.accountType = accountType;
         this.currentCustomer = currentCustomer;
     }
+<<<<<<< HEAD
 
     public Transaction(char type, Customer currentCustomer, double amount, double balance, String accountType,
             String date) throws ParseException {
         super(type, "" + currentCustomer.getNumber(), date);
+=======
+    public Transaction(char type, Customer currentCustomer, double amount, double balance, String accountType, String date) throws ParseException {
+        super(type, ""+currentCustomer.getNumber(), date);
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         this.amount = amount;
         this.currentBalance = balance;
         this.accountType = accountType;
@@ -481,11 +601,19 @@ class Transaction extends Activity {
         switch (this.type) {
 
         case 'D': // Deposite
+<<<<<<< HEAD
             return String.format("Account number %s 'D' %sAccount Diposit amount %f Current balance %f %s\n",
                     currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
 
         case 'W': // Withdrawal
             return String.format("Account number %s 'W' %sAccount Withdrawal amount %f Current balance %f %s\n",
+=======
+            return String.format("Account number %s 'D' %sAccount Diposit amount %f Current balance %f %s",
+                    currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
+
+        case 'W': // Withdrawal
+            return String.format("Account number %s 'W' %sAccount Withdrawal amount %f Current balance %f %s",
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
                     currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
         }
         return null;
@@ -498,7 +626,11 @@ class Activity {
     protected char type;
     protected String currentNumber;
 
+<<<<<<< HEAD
     public Activity(char type, String currentNumber) {
+=======
+    public Activity(char type, String currentNumber) { 
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
         this.type = type;
         date = new java.util.Date();
         this.currentNumber = currentNumber;
@@ -511,9 +643,15 @@ class Activity {
     }
 
     private Date stringToDate(String s) throws NullPointerException, IllegalArgumentException, ParseException {
+<<<<<<< HEAD
         return new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(s);
     }
 
+=======
+        return new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(s); 
+    }
+    
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
     public char getType() {
         return this.type;
     }
@@ -523,6 +661,7 @@ class Activity {
         switch (this.type) {
 
         case 'A': // Attempt login
+<<<<<<< HEAD
             return String.format("Account number %s 'A' login-Attempt %s\n", this.currentNumber, date.toString());
 
         case 'F': // failed login
@@ -562,6 +701,47 @@ class Activity {
         case 'Z': // print all activities request
             return String.format("Account number %s 'Z' made a print all customer activities request %s\n",
                     this.currentNumber, date.toString());
+=======
+            return String.format("Account number %s 'A' login-Attempt %s", this.currentNumber, date.toString());
+
+        case 'F': // failed login
+            return String.format("Account number %s 'F' failed-login %s", this.currentNumber, date.toString());
+
+        case 'L': // Login successful
+            return String.format("Account number %s 'L' successful-login %s", this.currentNumber, date.toString());
+
+        case 'C': // CheckingAccount access
+            return String.format("Account number %s 'C' Accessed checking account %s", this.currentNumber,
+                    date.toString());
+
+        case 'S': // SavingAccount access
+            return String.format("Account number %s 'S' Accessed saving account %s", this.currentNumber,
+                    date.toString());
+
+        case 'P': // PrintSummary
+            return String.format("Account number %s 'P' requested Account summary %s", this.currentNumber,
+                    date.toString());
+
+        case 'B': // Back to account screen
+            return String.format("Account number %s 'B' went back to accounts screen %s", this.currentNumber,
+                    date.toString());
+
+        case 'Q': // Quit
+            String s = String.format("Account number %s 'Q' logout %s", this.currentNumber, date.toString());
+            return s;
+
+        case 'X': // print diposites request
+            return String.format("Account number %s 'X' made a print diposites request %s", this.currentNumber,
+                    date.toString());
+
+        case 'Y': // print withdrawals request
+            return String.format("Account number %s 'Y' made a print withdrawals request %s", this.currentNumber,
+                    date.toString());
+        
+        case 'Z': // print all activities request
+            return String.format("Account number %s 'Z' made a print all customer activities request %s", this.currentNumber,
+                    date.toString());
+>>>>>>> b76f7f73553341d923a9e416b9565acec19b8674
 
         }
         return null;
