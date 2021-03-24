@@ -1,7 +1,7 @@
-Account number:01 PIN:0101 login (java.util.date)
-Account number:01 PIN:0101 checkingAccount deposite Amount:1000.0 currentBalance:1000.0 (java.util.date)
-Account number:01 PIN:0101 checkingAccount withdrawal Amount 400.0 currentBalance:600.0 (java.util.date)
-Account number:01 PIN:0101 printAccountSummary (java.util.date)
-Account number:01 PIN:0101 logout (java.util.date)
-Account number:02 PIN:0202 login (java.util.date)
-Account number:02 PIN:0202 logout (java.util.date)
+Account number 01 'A' login-Attempt Wed Mar 24 17:01:58 EET 2021
+Account number 01 'L' successful-login Wed Mar 24 17:02:00 EET 2021
+Account number 01 'C' Accessed checking account Wed Mar 24 17:02:01 EET 2021
+Account number 01 'D' checkingAccount Diposit amount 220.000000 Current balance 220.000000 Wed Mar 24 17:02:03 EET 2021
+Account number 01 'W' checkingAccount Withdrawal amount 20.000000 Current balance 200.000000 Wed Mar 24 17:02:06 EET 2021
+Account number 01 'B' went back to accounts screen Wed Mar 24 17:02:13 EET 2021
+Account number 01 'Q' logout Wed Mar 24 17:02:15 EET 2021
