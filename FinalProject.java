@@ -1,12 +1,17 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.OutputStream;
+//i was thinking about using this to re write the content of the logFile
+//import java.io.FileOutputStream; 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-//adding some test notes
 public class FinalProject {
 
     public static void main(String[] args) throws java.io.IOException {
@@ -22,7 +27,6 @@ public class FinalProject {
             double savingAcountBalance = input.nextDouble();
             bank.addCustomer(PIN, number);
         }
-        // change 1
         ATM atm = new ATM(bank);
         atm.loadLog();
         while (atm.getState() != ATM.QUIT) {
@@ -47,10 +51,6 @@ class BankAccount {
         return this.balance;
     }
 
-    public double test() {
-        return this.balance;
-    }
-
 }
 
 class Customer {
@@ -58,7 +58,6 @@ class Customer {
     private ArrayList<Activity> transactions;
     private BankAccount checkingAcount;
     private BankAccount savingAcount;
-    // change 2
     private String number;
     private String PIN;
 
@@ -97,7 +96,7 @@ class Customer {
         }
     }
 
-    public ArrayList<Activity> getArrayList() {
+    public ArrayList<Activity> getTransactionsList() {
         return this.transactions;
     }
 }
@@ -134,8 +133,8 @@ class ATM {
     public final static String PIN = "PIN";
     public final static String ACCOUNT = "ACCOUNT";
     public final static String TRANSACT = "TRANSACT";
-    public final static String QUIT = "QUIT";
     public final static String SUMMARY = "SUMMARY";
+    public final static String QUIT = "QUIT";
 
     private Bank currentBank;
     private String state;
@@ -165,100 +164,68 @@ class ATM {
         return this.state;
     }
 
-    public void prompts() {
+    public void prompts() throws FileNotFoundException {
 
         switch (this.state) {
         case ATM.START:
             System.out.print("Enter customer ID : ");
-            this.currentNumber = this.input.nextInt();
+            this.currentNumber = this.input.next();
             this.setState(ATM.PIN);
-            this.logArray.add(new Activity('A'));
+            this.logArray.add(new Activity('A', ""+this.currentNumber));
             break;
         case ATM.PIN:
             System.out.print("Enter PIN: ");
             this.currentPIN = this.input.next();
             this.currentCustomer = this.currentBank.getCustomer(currentPIN, currentNumber);
             if (this.currentCustomer != null) {
-                this.setState = ATM.ACCOUNT;
+                this.setState(ATM.ACCOUNT);
                 this.currentNumber = this.currentCustomer.getNumber();
                 currentActivity = new Activity('L', this.currentNumber);
                 this.logArray.add(currentActivity);
                 this.currentCustomer.addActivity(currentActivity);
             } else {
-                this.setState = ATM.START;
+                this.setState(ATM.START);
                 this.logArray.add(new Activity('F', this.currentNumber));
             }
 
         case ATM.ACCOUNT:
-            System.out.print("A=Checking, B=Savings, C=GetSummary, D=Logout: ");
+            System.out.print("A=Checking-Account, B=Savings-Account, C=Get-customers-activity-summary, D=Logout: ");
             char option = Character.toLowerCase(this.input.next().charAt(0));
             switch (option) {
             case 'a':
                 this.currentAccount = this.currentCustomer.getCheckingAcount();
                 currentAccountType = "checking";
                 this.state = ATM.TRANSACT;
+                this.logArray.add(new Activity('C', ""+this.currentNumber));
                 break;
-                this.logArray.add(new Activity('C', this.currentNumber));
             case 'b':
                 this.currentAccount = this.currentCustomer.getSavingAcount();
                 currentAccountType = "saving";
                 this.state = ATM.TRANSACT;
+                this.logArray.add(new Activity('S', ""+this.currentNumber));
                 break;
-                this.logArray.add(new Activity('S', this.currentNumber));
             case 'c':
                 this.state = ATM.SUMMARY;
-                this.currentCustomer.printSummary();
-                this.logArray.add(new Activity('P', this.currentNumber));
+                //this is not needed, since the next state (SUMMARY) gives options on what to print
+                //this.currentCustomer.printSummary();
+                this.logArray.add(new Activity('P', ""+this.currentNumber));
                 break;
             case 'd':
-                this.logArray.add(new Activity('Q', this.currentNumber));
+                this.logArray.add(new Activity('Q', ""+this.currentNumber));
                 this.state = ATM.START;
                 this.currentCustomer = null;
                 this.currentAccount = null;
-                this.currentNumber = -1;
+                this.currentNumber = null;
                 this.currentPIN = null;
                 saveLog();
                 break;
             }
             break;
-        case ATM.SUMMARY:
-            System.out.print("A=deposites, B=withdrawals, C=full Summary, D=back: ");
-            char option2 = Character.toLowerCase(this.input.next().charAt(0));
-            ArrayList<Activity> customerArray = this.currentCustomer.getArrayList();
-            switch (option2) {
-            case 'a':
-            for (int i = 0; i < customerArray.size(); i++) {
-                if(customerArray.get(i).getType() == 'd'){
-                    customerArray.get(i).toString();
-                }
-            }
-                
-                break;
-            case 'b':
-            for (int i = 0; i < customerArray.size(); i++) {
-                if(customerArray.get(i).getType() == 'w'){
-                    customerArray.get(i).toString();
-                }
-            }
-
-                break;
-            case 'c': 
-                for (int i = 0; i < customerArray.size(); i++) {
-                
-                        customerArray.get(i).toString();
-                    
-                }
-                break;
-            case 'd':
-                this.state = ATM.ACCOUNT;
-                break;
-            }
-
-            break;
+        
         case ATM.TRANSACT:
 
-            System.out.println("Balance = " + this.currentAccount.getBalance());
-            System.out.print("A=Deposit, B=Withdrawal, C=Cancel: ");
+            System.out.println("Current Balance = " + this.currentAccount.getBalance());
+            System.out.print("A=Deposit, B=Withdraw, C=Print-account-summary D=Cancel: ");
             option = Character.toLowerCase(this.input.next().charAt(0));
             double amount;
             switch (option) {
@@ -266,58 +233,191 @@ class ATM {
                 System.out.print("Amount: ");
                 amount = this.input.nextDouble();
                 currentAccount.deposits(amount);
-                currentActivity = new Transaction('D', amount, this.currentAccount.getBalance(),
+                currentActivity = new Transaction('D', this.currentCustomer, amount, this.currentAccount.getBalance(),
                         this.currentAccountType);
                 this.currentCustomer.addActivity(currentActivity);
                 this.logArray.add(currentActivity);
                 this.currentAccount = null;
-                this.state = ATM.ACCOUNT;
+                this.state = ATM.TRANSACT; //instead of going to account state, it should stay in transact state until the user chooses 'back'
                 break;
             case 'b':
                 System.out.print("Amount: ");
                 amount = this.input.nextDouble();
                 currentAccount.withdrawals(amount);
-                currentActivity = new Transaction('W', amount, this.currentAccount.getBalance(), this.currentAccountType);
+                currentActivity = new Transaction('W', this.currentCustomer, amount, this.currentAccount.getBalance(),
+                        this.currentAccountType);
                 this.currentCustomer.addActivity(currentActivity);
                 this.logArray.add(currentActivity);
                 this.currentAccount = null;
-                this.state = ATM.ACCOUNT;
+                this.state = ATM.TRANSACT; //same thing here
                 break;
             case 'c':
+                //search the customer's arraylist of activities using currentAccountType and print all the found activities in this bankaccount
+                ArrayList<Activity> customerActivity = currentCustomer.getTransactionsList();
+                for (Activity element : customerActivity) {
+                    if (element.toString().contains(this.currentAccountType + " account")) {
+                        System.out.println(element.toString());
+                    }
+                }
+                break;
+            case 'd':
                 this.state = ATM.ACCOUNT;
-                this.logArray.add(new Activity('B', ));
+                this.logArray.add(new Activity('B', ""+this.currentCustomer.getNumber()));
                 break;
             }
             break;
 
+        case ATM.SUMMARY:
+            System.out.print("A=Print-deposites, B=Print-withdrawals, C=Get full activity summary, D=back: ");
+            char option2 = Character.toLowerCase(this.input.next().charAt(0));
+            ArrayList<Activity> customerActivitiesArray = this.currentCustomer.getTransactionsList();
+            switch (option2) {
+            case 'a':
+                for (int i = 0; i < customerActivitiesArray.size(); i++) {
+                    if (customerActivitiesArray.get(i).getType() == 'd') {
+                     customerActivitiesArray.get(i).toString();
+                    }
+                }
+                this.logArray.add(new Activity('X', ""+this.currentCustomer.getNumber()));
+                break;
+
+            case 'b':
+                for (int i = 0; i < customerActivitiesArray.size(); i++) {
+                    if (customerActivitiesArray.get(i).getType() == 'w') {
+                     customerActivitiesArray.get(i).toString();
+                    }
+                }
+                this.logArray.add(new Activity('Y', ""+this.currentCustomer.getNumber()));
+                break;
+
+            case 'c':
+                this.logArray.add(new Activity('Z', ""+this.currentCustomer.getNumber()));
+                //instead of just searching through the customer's transactions, if the customer wants a full activity summary
+                //we should get it from the logArray 
+                // for (int i = 0; i < customerActivitiesArray.size(); i++) {
+                //     customerActivitiesArray.get(i).toString();
+                // }
+                // break;
+
+                //search the logArray and get all activities related to this customer
+                String[] activityString;
+                for (Activity element : logArray) {
+                    activityString = element.toString().split(" ");
+                    if (activityString[2].equals(""+this.currentCustomer.getNumber())) {
+                        System.out.println(element.toString());
+                    }
+                }
+
+            case 'd':
+                this.state = ATM.ACCOUNT;
+                this.logArray.add(new Activity('B', ""+this.currentCustomer.getNumber()));
+                break;
+            }
+
+            break;
         }
+        
 
     }
 
-    public void loadLog() {
+    public void loadLog() throws FileNotFoundException, ParseException {
         try (Scanner tempScanner = new Scanner(this.logFile)) {
             while (tempScanner.hasNextLine()) {
                 String s = tempScanner.nextLine();
-                Transaction t3 = lineToTransaction(s);
-                logArray.add(e);
+                logArray.add(lineToTransaction(s));
             }
         }
     }
 
-    public void saveLog() {
-        try (FileOutputStream logWriter = new FileOutputStream("Log.txt")) {
+    public void saveLog() throws FileNotFoundException {
+        //i need a way to delete the content of the file before i re-write the logArray into the logFile
+        //i thought about deleting the file and creating a new one but maybe you know a better way? 
+        //logFile.delete();
+        //logFile.mkdirs();
+        //i also thought about replacing the content of the logFile with "" instead of deleting the file
+        try (PrintWriter logWriter = new PrintWriter(logFile)) {
             int count = 0;
             while (count < this.logArray.size()) {
-                logWriter.write(this.logArray.get(count++));
+                logWriter.write(this.logArray.get(count++).toString());
             }
         }
     }
 
-    private Activity lineToTransaction(String s) {
-        // take the line s, use charAt and next() to split the line into variables, then
-        // use the variables to create a transaction
-        // return Transaction
-        return transaction;
+    private Activity lineToTransaction(String s) throws ParseException {
+        String[] stringContent = s.split(" ");
+        String accountNumber = stringContent[3];
+        String date = "";
+        char activityType = Character.toLowerCase(s.charAt(19));
+        switch (activityType) {
+        case 'a':
+            for (int i = 4; i < 10; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('A', accountNumber, date);
+
+        case 'f':
+            for (int i = 4; i < 10; i++) {
+                date += stringContent[i] + " ";
+            }   
+            return new Activity('F', accountNumber, date);
+
+        case 'c':
+            for (int i = 6; i < 12; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('C', accountNumber, date);
+
+        case 's':
+            for (int i = 6; i < 12; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('S', accountNumber, date);
+
+        case 'p':
+            for (int i = 6; i < 12; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('P', accountNumber, date);
+
+        case 'b':
+            for (int i = 8; i < 14; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('B', accountNumber, date);
+
+        case 'q':
+            for (int i = 4; i < 10; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('Q', accountNumber, date);
+
+        case 'd':
+            for (int i = 9; i < 15; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Transaction('D', this.currentCustomer, Double.parseDouble(stringContent[7]),
+                    Double.parseDouble(stringContent[9]), stringContent[4], date);
+
+        case 'w':
+            for (int i = 9; i < 15; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Transaction('W', this.currentCustomer, Double.parseDouble(stringContent[7]),
+            Double.parseDouble(stringContent[9]), stringContent[4], date);
+        
+        case 'x':
+            for (int i = 9; i < 15; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('X', accountNumber);
+        
+        case 'y':
+            for (int i = 9; i < 15; i++) {
+                date += stringContent[i] + " ";
+            }
+            return new Activity('Y', accountNumber);
+        }
+        return null;
     }
 
 }
@@ -329,7 +429,14 @@ class Transaction extends Activity {
     private Customer currentCustomer;
 
     public Transaction(char type, Customer currentCustomer, double amount, double balance, String accountType) {
-        super(type);
+        super(type, ""+currentCustomer.getNumber());
+        this.amount = amount;
+        this.currentBalance = balance;
+        this.accountType = accountType;
+        this.currentCustomer = currentCustomer;
+    }
+    public Transaction(char type, Customer currentCustomer, double amount, double balance, String accountType, String date) throws ParseException {
+        super(type, ""+currentCustomer.getNumber(), date);
         this.amount = amount;
         this.currentBalance = balance;
         this.accountType = accountType;
@@ -347,14 +454,12 @@ class Transaction extends Activity {
         switch (this.type) {
 
         case 'D': // Deposite
-            return String.format("Account number:%s PIN:%s %sAccount Diposite amount:%f Current balance:%f %s",
-                    currentCustomer.getNumber(), currentCustomer.getPIN(), this.accountType, this.amount,
-                    this.currentBalance, date.toString());
+            return String.format("Account number %s 'D' %sAccount Diposit amount %f Current balance %f %s",
+                    currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
 
         case 'W': // Withdrawal
-            return String.format("Account number:%s PIN:%s %sAccount Withdrawal amount:%f Current balance:%f %s",
-                    currentCustomer.getNumber(), currentCustomer.getPIN(), this.accountType, this.amount,
-                    this.currentBalance, date.toString());
+            return String.format("Account number %s 'W' %sAccount Withdrawal amount %f Current balance %f %s",
+                    currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
         }
         return null;
     }
@@ -366,13 +471,22 @@ class Activity {
     protected char type;
     protected String currentNumber;
 
-    public Activity(char type, String currentNumber) { // for failed attempt, takes the current number as a String
-                                                       // instead of currentCustomer.getNumber
+    public Activity(char type, String currentNumber) { 
         this.type = type;
         date = new java.util.Date();
         this.currentNumber = currentNumber;
     }
 
+    public Activity(char type, String currentNumber, String date) throws ParseException {
+        this.type = type;
+        this.date = stringToDate(date);
+        this.currentNumber = currentNumber;
+    }
+
+    private Date stringToDate(String s) throws NullPointerException, IllegalArgumentException, ParseException {
+        return new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(s); 
+    }
+    
     public char getType() {
         return this.type;
     }
@@ -382,30 +496,45 @@ class Activity {
         switch (this.type) {
 
         case 'A': // Attempt login
-            return String.format("Account number:%s login-Attempt %s", this.currentNumber, date.toString());
+            return String.format("Account number %s 'A' login-Attempt %s", this.currentNumber, date.toString());
 
         case 'F': // failed login
-            return String.format("Account number:%s failed-login %s", this.currentNumber, date.toString());
+            return String.format("Account number %s 'F' failed-login %s", this.currentNumber, date.toString());
 
         case 'L': // Login successful
-            return String.format("Account number:%s successful-login %s", this.currentNumber, date.toString());
+            return String.format("Account number %s 'L' successful-login %s", this.currentNumber, date.toString());
 
         case 'C': // CheckingAccount access
-            return String.format("Account number:%s Accessed checking account %s", this.currentNumber, date.toString());
+            return String.format("Account number %s 'C' Accessed checking account %s", this.currentNumber,
+                    date.toString());
 
         case 'S': // SavingAccount access
-            return String.format("Account number:%s Accessed saving account %s", this.currentNumber, date.toString());
+            return String.format("Account number %s 'S' Accessed saving account %s", this.currentNumber,
+                    date.toString());
 
         case 'P': // PrintSummary
-            return String.format("Account number:%s requested Account summary %s", this.currentNumber, date.toString());
+            return String.format("Account number %s 'P' requested Account summary %s", this.currentNumber,
+                    date.toString());
 
         case 'B': // Back to account screen
-            return String.format("Account number:%s went back to accounts screen %s", currentCustomer.getNumber(),
+            return String.format("Account number %s 'B' went back to accounts screen %s", this.currentNumber,
                     date.toString());
 
         case 'Q': // Quit
-            return new String.format("Account number:%s PIN:%s logout %s", currentCustomer.getNumber(),
-                    currentCustomer.getPIN(), date.toString());
+            String s = String.format("Account number %s 'Q' logout %s", this.currentNumber, date.toString());
+            return s;
+
+        case 'X': // print diposites request
+            return String.format("Account number %s 'X' made a print diposites request %s", this.currentNumber,
+                    date.toString());
+
+        case 'Y': // print withdrawals request
+            return String.format("Account number %s 'Y' made a print withdrawals request %s", this.currentNumber,
+                    date.toString());
+        
+        case 'Z': // print all activities request
+            return String.format("Account number %s 'Z' made a print all customer activities request %s", this.currentNumber,
+                    date.toString());
 
         }
         return null;
