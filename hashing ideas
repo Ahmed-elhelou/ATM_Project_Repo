@@ -1,0 +1,6 @@
+import java.security.MessageDigest;
+
+String message1 = "hello";
+    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+    messageDigest.update(message1.getBytes());
+    String stringHash = new String(messageDigest.digest());
