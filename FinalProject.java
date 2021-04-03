@@ -366,79 +366,19 @@ class ATM {
 
     private Activity lineToTransaction(String s) throws ParseException {
         String[] stringContent = s.split(" ");
-        String accountNumber = stringContent[3];
+        String[] reverseString = new String[6];
+        String accountNumber = stringContent[2];
         String date = "";
-        char activityType = Character.toLowerCase(s.charAt(18));
-        switch (activityType) {
-        case 'a':
-            for (int i = 4; i < 10; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('A', accountNumber, date);
+        char activityType = Character.toLowerCase(stringContent[4].charAt(0));
 
-        case 'f':
-            for (int i = 4; i < 10; i++) {
-                date += stringContent[i] + " ";
-            }   
-            return new Activity('F', accountNumber, date);
-
-        case 'c':
-            for (int i = 6; i < 12; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('C', accountNumber, date);
-
-        case 's':
-            for (int i = 6; i < 12; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('S', accountNumber, date);
-
-        case 'p':
-            for (int i = 6; i < 12; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('P', accountNumber, date);
-
-        case 'b':
-            for (int i = 8; i < 14; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('B', accountNumber, date);
-
-        case 'q':
-            for (int i = 4; i < 10; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('Q', accountNumber, date);
-
-        case 'd':
-            for (int i = 9; i < 15; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Transaction('D', this.currentCustomer, Double.parseDouble(stringContent[7]),
-                    Double.parseDouble(stringContent[9]), stringContent[4], date);
-
-        case 'w':
-            for (int i = 9; i < 15; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Transaction('W', this.currentCustomer, Double.parseDouble(stringContent[7]),
-            Double.parseDouble(stringContent[9]), stringContent[4], date);
-        
-        case 'x':
-            for (int i = 9; i < 15; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('X', accountNumber);
-        
-        case 'y':
-            for (int i = 9; i < 15; i++) {
-                date += stringContent[i] + " ";
-            }
-            return new Activity('Y', accountNumber);
+        for (int i = stringContent.length - 1, j = 5; i > stringContent.length - 7; i--, j--) {
+            reverseString[j] = stringContent[i];
         }
-        return null;
+        for (int i = 0; i < reverseString.length; i++) {
+            date += reverseString[i] + " ";
+        }
+        return new Activity(activityType, accountNumber, date);
+
     }
 
 }
