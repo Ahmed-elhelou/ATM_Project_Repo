@@ -1,17 +1,41 @@
-Account number 01 L login Wed Mar 24 08:24:37 EET 2021
-Account number 01 D checkingAccount deposite Amount 1000.0 currentBalance 1000.0 Wed Mar 24 08:24:37 EET 2021
-Account number 01 W checkingAccount withdrawal Amount 400.0 currentBalance 600.0 Wed Mar 24 08:24:37 EET 2021
-Account number 01 P requested account summary Wed Mar 24 08:24:37 EET 2021
-Account number 01 Q logout Wed Mar 24 08:24:37 EET 2021
-Account number 02 A login-Attempt Wed Mar 24 08:24:37 EET 2021
-Account number 02 F failed-login Wed Mar 24 08:24:37 EET 2021
-Account number 02 A login-Attempt Wed Mar 24 08:24:37 EET 2021
-Account number 02 L successful-login Wed Mar 24 08:24:37 EET 2021
-Account number 02 C Accessed checking account Wed Mar 24 08:24:37 EET 2021
-Account number 02 B went back to accounts screen Wed Mar 24 08:24:37 EET 2021
-Account number 02 S Accessed saving account Wed Mar 24 08:24:37 EET 2021
-Account number 01 D checkingAccount deposite Amount 1000.0 currentBalance 1000.0 Wed Mar 24 08:24:37 EET 2021
-Account number 02 S Accessed saving account Wed Mar 24 08:24:37 EET 2021
-Account number 02 X made a print deposites request Wed Mar 24 08:24:37 EET 2021
-Account number 02 Y made a print withdrawals request Wed Mar 24 08:24:37 EET 2021
-Account number 02 Z made a print all customer activities request Wed Mar 24 08:24:37 EET 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:00:43 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:37:46 EEST 2021
+Account number 01 F failed-login Sat Mar 27 11:37:57 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:37:58 EEST 2021
+Account number 01 L successful-login Sat Mar 27 11:37:59 EEST 2021
+Account number 01 C Accessed checking account Sat Mar 27 11:37:59 EEST 2021
+Account number 01 D CheckingAccount Diposit amount 1000.00 Current balance 1000.00 Sat Mar 27 11:38:01 EEST 2021
+Account number 01 W CheckingAccount Withdrawal amount 500.00 Current balance 500.00 Sat Mar 27 11:38:04 EEST 2021
+Account number 01 P requested Account summary Sat Mar 27 11:38:05 EEST 2021
+Account number 01 B went back to accounts screen Sat Mar 27 11:38:06 EEST 2021
+Account number 01 P requested Account summary Sat Mar 27 11:38:07 EEST 2021
+Account number 01 X made a print diposites request Sat Mar 27 11:38:08 EEST 2021
+Account number 01 Y made a print withdrawals request Sat Mar 27 11:38:09 EEST 2021
+Account number 01 Z made a print all customer activities request Sat Mar 27 11:38:10 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:40:10 EEST 2021
+Account number 01 F failed-login Sat Mar 27 11:40:12 EEST 2021
+Account number 01 A login-Attempt Sat Mar 27 11:40:13 EEST 2021
+Account number 01 L successful-login Sat Mar 27 11:40:14 EEST 2021
+Account number 01 C Accessed checking account Sat Mar 27 11:40:16 EEST 2021
+Account number 01 D CheckingAccount Diposit amount 1000.00 Current balance 1000.00 Sat Mar 27 11:40:18 EEST 2021
+Account number 01 W CheckingAccount Withdrawal amount 500.00 Current balance 500.00 Sat Mar 27 11:40:21 EEST 2021
+Account number 01 P requested Account summary Sat Mar 27 11:40:22 EEST 2021
+Account number 01 B went back to accounts screen Sat Mar 27 11:40:25 EEST 2021
+Account number 01 P requested Account summary Sat Mar 27 11:40:27 EEST 2021
+Account number 01 X made a print diposites request Sat Mar 27 11:40:29 EEST 2021
+Account number 01 Y made a print withdrawals request Sat Mar 27 11:40:33 EEST 2021
+Account number 01 Z made a print all customer activities request Sat Mar 27 11:40:35 EEST 2021
