@@ -1,4 +1,3 @@
-package final_project;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.security.*;
 
-class ATM {
+public class ATM {
 
     public final static String START = "START";
     public final static String PIN = "PIN";
@@ -39,8 +38,7 @@ class ATM {
         this.currentBank = currentBank;
         input = new Scanner(System.in);
         logArray = new ArrayList<>();
-        logFile = new File(
-                "C:\\Users\\HP\\Desktop\\University\\Porgramming II\\Assignments\\Project part 1\\final_project\\Log.txt");
+        logFile = new File("Log.txt");
     }
 
     public void setState(String state) {
@@ -111,6 +109,7 @@ class ATM {
                 this.currentNumber = null;
                 this.currentPIN = null;
                 saveLog();
+                this.currentBank.save();
                 break;
             }
             break;
@@ -130,8 +129,7 @@ class ATM {
                         this.currentAccountType);
                 this.currentCustomer.addActivity(currentActivity);
                 this.logArray.add(currentActivity);
-                // System.out.println("error");
-                // this.currentAccount = null;
+
                 this.state = ATM.TRANSACT;
                 numberOfNewActivities++;
                 break;
@@ -151,7 +149,7 @@ class ATM {
                 ArrayList<Activity> customerActivity = currentCustomer.getTransactionsList();
                 for (Activity element : customerActivity) {
                     if (element.toString().contains(this.currentAccountType + "Account")) { // CheckingAccount
-                        System.out.print(element.toString());
+                        System.out.println(element.toString());
                     }
                 }
                 this.logArray.add(new Activity('P', this.currentNumber));
@@ -166,7 +164,8 @@ class ATM {
             break;
 
         case ATM.SUMMARY:
-            System.out.print("A=Print-deposites, B=Print-withdrawals, C=Get full activity summary, D=Back: ");
+            System.out.print(
+                    "A=Print-latest-deposites, B=Print-latest-withdrawals, C=Get full activity summary, D=Back: ");
             ArrayList<Activity> customerActivitiesArray = this.currentCustomer.getTransactionsList();
             char option2 = Character.toLowerCase(this.input.next().charAt(0));
             char typeChar = 'K';
@@ -187,10 +186,14 @@ class ATM {
                 for (Activity element : logArray) {
                     if (element != null) {
                         String s2 = element.toString();
-                        activityString = s2.split(" ");
-                        if (activityString[2].equals(this.currentCustomer.getNumber())) {
-                            System.out.print(s2);
+                        if (s2 != null) {
+                            activityString = s2.split(" ");
+
+                            if (activityString[2].equals(this.currentCustomer.getNumber())) {
+                                System.out.println(s2);
+                            }
                         }
+
                     }
                 }
                 this.logArray.add(new Activity('Z', this.currentCustomer.getNumber()));
@@ -205,7 +208,7 @@ class ATM {
             if (typeChar != 'c') {
                 for (int i = 0; i < customerActivitiesArray.size(); i++) {
                     if (customerActivitiesArray.get(i).getType() == typeChar) {
-                        System.out.print(customerActivitiesArray.get(i).toString());
+                        System.out.println(customerActivitiesArray.get(i).toString());
                     }
                 }
                 this.logArray.add(new Activity(activityChar, this.currentCustomer.getNumber()));
@@ -220,7 +223,8 @@ class ATM {
         try (Scanner tempScanner = new Scanner(this.logFile)) {
             while (tempScanner.hasNextLine()) {
                 String s = tempScanner.nextLine();
-                logArray.add(lineToTransaction(s));
+                Activity activity = Activity.lineToActivity(s);
+                logArray.add(activity);
             }
         }
         numberOfSavedActivities = logArray.size();
@@ -228,29 +232,17 @@ class ATM {
     }
 
     public void saveLog() throws FileNotFoundException {
+
         try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(logFile, true))) {
             for (int i = numberOfSavedActivities; i < numberOfSavedActivities + numberOfNewActivities; i++) {
-                logWriter.write(this.logArray.get(i).toString());
+                String s = this.logArray.get(i).toString();
+                if (s != null)
+                    logWriter.println(s);
             }
+
             numberOfSavedActivities += numberOfNewActivities;
+            numberOfNewActivities = 0;
         }
-    }
-
-    private Activity lineToTransaction(String s) throws ParseException {
-        String[] stringContent = s.split(" ");
-        String[] reverseString = new String[6];
-        String accountNumber = stringContent[2];
-        String date = "";
-        char activityType = Character.toLowerCase(stringContent[4].charAt(0));
-
-        for (int i = stringContent.length - 1, j = 5; i > stringContent.length - 7; i--, j--) {
-            reverseString[j] = stringContent[i];
-        }
-        for (int i = 0; i < reverseString.length; i++) {
-            date += reverseString[i] + " ";
-        }
-        return new Activity(activityType, accountNumber, date);
-
     }
 
 }

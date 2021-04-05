@@ -1,7 +1,14 @@
-package final_project;
 
-class BankAccount {
+public class BankAccount {
     private double balance;
+
+    public BankAccount(double balance) {
+        this.balance = balance;
+    }
+
+    public BankAccount() {
+        this(0);
+    }
 
     public void deposits(double amount) {
         this.balance += amount;

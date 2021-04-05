@@ -1,8 +1,7 @@
-package final_project;
 
 import java.text.ParseException;
 
-class Transaction extends Activity {
+public class Transaction extends Activity {
     private double amount;
     private double currentBalance;
     private String accountType;
@@ -36,11 +35,11 @@ class Transaction extends Activity {
         switch (this.type) {
 
         case 'D': // Deposite
-            return String.format("Account number %s D %sAccount Diposit amount %.2f Current balance %.2f %s\n",
+            return String.format("Account number %s D %sAccount Diposit amount %.2f Current balance %.2f %s",
                     currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
 
         case 'W': // Withdrawal
-            return String.format("Account number %s W %sAccount Withdrawal amount %.2f Current balance %.2f %s\n",
+            return String.format("Account number %s W %sAccount Withdrawal amount %.2f Current balance %.2f %s",
                     currentCustomer.getNumber(), this.accountType, this.amount, this.currentBalance, date.toString());
         }
         return null;

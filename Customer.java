@@ -1,8 +1,7 @@
-package final_project;
 
 import java.util.ArrayList;
 
-class Customer {
+public class Customer {
 
     private ArrayList<Activity> transactions;
     private BankAccount checkingAcount;
@@ -13,6 +12,14 @@ class Customer {
     public Customer(String PIN, String number) {
         this.checkingAcount = new BankAccount();
         this.savingAcount = new BankAccount();
+        this.transactions = new ArrayList<>();
+        this.PIN = PIN;
+        this.number = number;
+    }
+
+    public Customer(String PIN, String number, double checkingAccountBalance, double savingAcountBalance) {
+        this.checkingAcount = new BankAccount(checkingAccountBalance);
+        this.savingAcount = new BankAccount(savingAcountBalance);
         this.transactions = new ArrayList<>();
         this.PIN = PIN;
         this.number = number;
