@@ -47,7 +47,26 @@ public class FinalProject {
                 case 'b':
                     System.out.print("Amount: ");
                     amount = input.nextDouble();
-                    atm.withdrawalsState(amount);
+                    double balance = atm.getCurrentAccount().getBalance();
+                    if (balance >= amount) {
+
+                        atm.withdrawalsState(amount);
+                    } else {
+                        System.out.printf(
+                                "You Don't Have Enough Money,Your Current Balance Is %.2f, Do You Want To Withdrawl It (Y/N)? ",
+                                balance);
+                        char option2 = Character.toLowerCase(input.next().charAt(0));
+                        switch (option2) {
+                        case 'y':
+                            amount = balance;
+                            break;
+                        case 'n':
+                            amount = 0;
+                            break;
+
+                        }
+                        atm.withdrawalsState(amount);
+                    }
                     break;
                 case 'c':
                     Activity.printlnArray(atm.getAccountSummary());

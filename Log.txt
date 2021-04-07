@@ -300,3 +300,9 @@ Account number 01 S Accessed saving account Wed Apr 07 23:36:06 EEST 2021
 Account number 01 D SavingAccount Diposit amount 5555.00 Current balance 5555.00 Wed Apr 07 23:36:09 EEST 2021
 Account number 01 B went back to accounts screen Wed Apr 07 23:36:11 EEST 2021
 Account number 01 Q logout Wed Apr 07 23:36:13 EEST 2021
+Account number 03 A login-Attempt Thu Apr 08 00:03:27 EEST 2021
+Account number 03 L successful-login Thu Apr 08 00:03:29 EEST 2021
+Account number 03 C Accessed checking account Thu Apr 08 00:03:30 EEST 2021
+Account number 03 W CheckingAccount Withdrawal amount 15555.00 Current balance 0.00 Thu Apr 08 00:03:44 EEST 2021
+Account number 03 B went back to accounts screen Thu Apr 08 00:03:48 EEST 2021
+Account number 03 Q logout Thu Apr 08 00:03:48 EEST 2021
