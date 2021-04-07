@@ -267,3 +267,36 @@ Account number 03 C Accessed checking account Tue Apr 06 00:20:54 EEST 2021
 Account number 03 D CheckingAccount Diposit amount 15555.00 Current balance 15555.00 Tue Apr 06 00:20:57 EEST 2021
 Account number 03 B went back to accounts screen Tue Apr 06 00:20:59 EEST 2021
 Account number 03 Q logout Tue Apr 06 00:20:59 EEST 2021
+Account number 05 A login-Attempt Wed Apr 07 16:02:27 EEST 2021
+Account number 05 F failed-login Wed Apr 07 16:02:29 EEST 2021
+Account number 0505 A login-Attempt Wed Apr 07 16:02:32 EEST 2021
+Account number 0505 F failed-login Wed Apr 07 16:02:35 EEST 2021
+Account number 05 A login-Attempt Wed Apr 07 16:02:36 EEST 2021
+Account number 05 L successful-login Wed Apr 07 16:02:37 EEST 2021
+Account number 05 Q logout Wed Apr 07 16:02:41 EEST 2021
+Account number 02 A login-Attempt Wed Apr 07 23:27:26 EEST 2021
+Account number 02 F failed-login Wed Apr 07 23:27:28 EEST 2021
+Account number 02 A login-Attempt Wed Apr 07 23:27:34 EEST 2021
+Account number 02 L successful-login Wed Apr 07 23:27:35 EEST 2021
+Account number 02 C Accessed checking account Wed Apr 07 23:27:37 EEST 2021
+Account number 02 W CheckingAccount Withdrawal amount 13.00 Current balance 100.00 Wed Apr 07 23:27:45 EEST 2021
+Account number 02 P requested Account summary Wed Apr 07 23:27:47 EEST 2021
+Account number 02 B went back to accounts screen Wed Apr 07 23:28:03 EEST 2021
+Account number 02 Q logout Wed Apr 07 23:28:04 EEST 2021
+Account number 01 A login-Attempt Wed Apr 07 23:28:07 EEST 2021
+Account number 01 L successful-login Wed Apr 07 23:28:08 EEST 2021
+Account number 01 P requested Account summary Wed Apr 07 23:28:10 EEST 2021
+Account number 01 B went back to accounts screen Wed Apr 07 23:28:28 EEST 2021
+Account number 01 Q logout Wed Apr 07 23:28:29 EEST 2021
+Account number 01 A login-Attempt Wed Apr 07 23:35:43 EEST 2021
+Account number 01 F failed-login Wed Apr 07 23:35:44 EEST 2021
+Account number 01 A login-Attempt Wed Apr 07 23:35:46 EEST 2021
+Account number 01 L successful-login Wed Apr 07 23:35:48 EEST 2021
+Account number 01 C Accessed checking account Wed Apr 07 23:35:49 EEST 2021
+Account number 01 D CheckingAccount Diposit amount 10.00 Current balance 10.00 Wed Apr 07 23:35:55 EEST 2021
+Account number 01 W CheckingAccount Withdrawal amount 1.00 Current balance 9.00 Wed Apr 07 23:36:00 EEST 2021
+Account number 01 B went back to accounts screen Wed Apr 07 23:36:03 EEST 2021
+Account number 01 S Accessed saving account Wed Apr 07 23:36:06 EEST 2021
+Account number 01 D SavingAccount Diposit amount 5555.00 Current balance 5555.00 Wed Apr 07 23:36:09 EEST 2021
+Account number 01 B went back to accounts screen Wed Apr 07 23:36:11 EEST 2021
+Account number 01 Q logout Wed Apr 07 23:36:13 EEST 2021

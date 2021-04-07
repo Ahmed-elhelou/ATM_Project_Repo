@@ -1,5 +1,6 @@
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 
@@ -26,6 +27,12 @@ public class Activity {
 
     public char getType() {
         return this.type;
+    }
+
+    public static void printlnArray(ArrayList<Activity> arrayList) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            System.out.println(arrayList.get(i));
+        }
     }
 
     @Override
@@ -90,7 +97,7 @@ public class Activity {
         for (int i = 0; i < reverseString.length; i++) {
             date += reverseString[i] + " ";
         }
-      
+
         if (activityType == 'D' || activityType == 'W') {
             double amount = Double.parseDouble(stringContent[7]);
             double currentBalance = Double.parseDouble(stringContent[10]);
