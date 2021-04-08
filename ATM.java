@@ -98,7 +98,7 @@ public class ATM {
     }
 
     public boolean pinState(String currentPIN) {
-        this.currentCustomer = this.currentBank.getCustomer(currentPIN, this.currentNumber);
+        this.currentCustomer = this.currentBank.getCustomer(Bank.hash(currentPIN), this.currentNumber);
         if (this.currentCustomer != null) {
             this.setState(ATM.ACCOUNT);
             this.currentNumber = this.currentCustomer.getNumber();

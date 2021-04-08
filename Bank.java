@@ -1,6 +1,7 @@
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class Bank {
     private File file;
 
     public Bank(File file) {
+
         try {
             this.file = file;
             Scanner input = new Scanner(this.file);
@@ -27,13 +29,9 @@ public class Bank {
     }
 
     public void addCustomer(String PIN, String number, double checkingAccountBalance, double savingAcountBalance) {
-        for (int i = 0; i < this.customers.size(); i++) {
-            if (this.customers.get(i).getNumber().equals(number)) {
-                System.out.println("this number: " + number + " is already registered!");
-                return;
-            }
-        }
+
         customers.add(new Customer(PIN, number, checkingAccountBalance, savingAcountBalance));
+        save();
     }
 
     public static boolean cheackEnteries(Customer customer, String PIN, String number) {
@@ -60,6 +58,27 @@ public class Bank {
             ex.getStackTrace();
         }
 
+    }
+
+    public static String hash(String text) {
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        }
+        messageDigest.update(text.getBytes());
+        byte[] result = messageDigest.digest();
+
+        return byteToString(result);
+    }
+
+    private static String byteToString(byte[] b) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < b.length; i++) {
+            sb.append(b[i] + "");
+        }
+        return new String(sb);
     }
 
 }
