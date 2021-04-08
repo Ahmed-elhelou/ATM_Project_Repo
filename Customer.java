@@ -7,26 +7,26 @@ public class Customer {
     private BankAccount checkingAcount;
     private BankAccount savingAcount;
     private String number;
-    private String PIN;
+    private String hashedPIN;
 
-    public Customer(String PIN, String number) {
+    public Customer(String hashedPIN, String number) {
         this.checkingAcount = new BankAccount();
         this.savingAcount = new BankAccount();
         this.transactions = new ArrayList<>();
-        this.PIN = PIN;
+        this.hashedPIN = hashedPIN;
         this.number = number;
     }
 
-    public Customer(String PIN, String number, double checkingAccountBalance, double savingAcountBalance) {
+    public Customer(String hashedPIN, String number, double checkingAccountBalance, double savingAcountBalance) {
         this.checkingAcount = new BankAccount(checkingAccountBalance);
         this.savingAcount = new BankAccount(savingAcountBalance);
         this.transactions = new ArrayList<>();
-        this.PIN = PIN;
+        this.hashedPIN = hashedPIN;
         this.number = number;
     }
 
-    public String getPIN() {
-        return this.PIN;
+    public String getHashedPIN() {
+        return this.hashedPIN;
     }
 
     public String getNumber() {
