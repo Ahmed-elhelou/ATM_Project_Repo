@@ -56,7 +56,6 @@ public class FinalProject {
                                 "You Don't Have Enough Money,Your Current Balance Is %.2f, Do You Want To Withdrawl It (Y/N)? ",
                                 balance);
                         char option2 = Character.toLowerCase(input.next().charAt(0));
-                        amount = option2 == 'y' ? balance : 0;
                         if (option2 == 'y') {
                             amount = balance;
                             atm.withdrawalsState(amount);
