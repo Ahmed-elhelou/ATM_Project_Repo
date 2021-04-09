@@ -22,6 +22,7 @@ public class Bank {
                 double savingAcountBalance = Double.parseDouble(input.next());
                 this.addCustomer(PIN, number, checkingAccountBalance, savingAcountBalance);
             }
+            input.close();
         } catch (Exception e) {
             e.getStackTrace();
         }
@@ -29,9 +30,7 @@ public class Bank {
     }
 
     public void addCustomer(String PIN, String number, double checkingAccountBalance, double savingAcountBalance) {
-
         customers.add(new Customer(PIN, number, checkingAccountBalance, savingAcountBalance));
-        save();
     }
 
     public static boolean cheackEnteries(Customer customer, String PIN, String number) {

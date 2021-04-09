@@ -56,16 +56,11 @@ public class FinalProject {
                                 "You Don't Have Enough Money,Your Current Balance Is %.2f, Do You Want To Withdrawl It (Y/N)? ",
                                 balance);
                         char option2 = Character.toLowerCase(input.next().charAt(0));
-                        switch (option2) {
-                        case 'y':
+                        amount = option2 == 'y' ? balance : 0;
+                        if (option2 == 'y') {
                             amount = balance;
-                            break;
-                        case 'n':
-                            amount = 0;
-                            break;
-
+                            atm.withdrawalsState(amount);
                         }
-                        atm.withdrawalsState(amount);
                     }
                     break;
                 case 'c':
@@ -85,11 +80,11 @@ public class FinalProject {
 
                 switch (option) {
                 case 'a':
-                    Activity.printlnArray(atm.getLatest('D', 'X'));
+                    Activity.printlnArray(atm.getLatest('D'));
                     break;
 
                 case 'b':
-                    Activity.printlnArray(atm.getLatest('W', 'Y'));
+                    Activity.printlnArray(atm.getLatest('W'));
                     break;
 
                 case 'c':
@@ -106,6 +101,7 @@ public class FinalProject {
 
             }
         }
+        input.close();
     }
 
 }

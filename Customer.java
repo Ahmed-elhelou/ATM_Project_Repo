@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Customer {
 
-    private ArrayList<Activity> transactions;
+    private ArrayList<Activity> activities;
     private BankAccount checkingAcount;
     private BankAccount savingAcount;
     private String number;
@@ -12,7 +12,7 @@ public class Customer {
     public Customer(String PIN, String number) {
         this.checkingAcount = new BankAccount();
         this.savingAcount = new BankAccount();
-        this.transactions = new ArrayList<>();
+        this.activities = new ArrayList<>();
         this.PIN = PIN;
         this.number = number;
     }
@@ -20,7 +20,7 @@ public class Customer {
     public Customer(String PIN, String number, double checkingAccountBalance, double savingAcountBalance) {
         this.checkingAcount = new BankAccount(checkingAccountBalance);
         this.savingAcount = new BankAccount(savingAcountBalance);
-        this.transactions = new ArrayList<>();
+        this.activities = new ArrayList<>();
         this.PIN = PIN;
         this.number = number;
     }
@@ -42,17 +42,10 @@ public class Customer {
     }
 
     public void addActivity(Activity tr) {
-        this.transactions.add(tr);
+        this.activities.add(tr);
     }
 
-    public void printSummary() {
-        System.out.println("Account Summary: ");
-        for (int i = 0; i < this.transactions.size(); i++) {
-            System.out.println(this.transactions.get(i).toString());
-        }
-    }
-
-    public ArrayList<Activity> getTransactionsList() {
-        return this.transactions;
+    public ArrayList<Activity> getActivitiesList() {
+        return this.activities;
     }
 }

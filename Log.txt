@@ -306,3 +306,51 @@ Account number 03 C Accessed checking account Thu Apr 08 00:03:30 EEST 2021
 Account number 03 W CheckingAccount Withdrawal amount 15555.00 Current balance 0.00 Thu Apr 08 00:03:44 EEST 2021
 Account number 03 B went back to accounts screen Thu Apr 08 00:03:48 EEST 2021
 Account number 03 Q logout Thu Apr 08 00:03:48 EEST 2021
+Account number 01 A login-Attempt Fri Apr 09 21:46:16 EEST 2021
+Account number 01 F failed-login Fri Apr 09 21:46:18 EEST 2021
+Account number 01 A login-Attempt Fri Apr 09 21:46:20 EEST 2021
+Account number 01 L successful-login Fri Apr 09 21:46:21 EEST 2021
+Account number 01 C Accessed checking account Fri Apr 09 21:46:23 EEST 2021
+Account number 01 D CheckingAccount Diposit amount 20.00 Current balance 20.00 Fri Apr 09 21:46:27 EEST 2021
+Account number 01 W CheckingAccount Withdrawal amount 2.00 Current balance 18.00 Fri Apr 09 21:46:32 EEST 2021
+Account number 01 P requested Account summary Fri Apr 09 21:46:35 EEST 2021
+Account number 01 B went back to accounts screen Fri Apr 09 21:46:50 EEST 2021
+Account number 01 S Accessed saving account Fri Apr 09 21:46:54 EEST 2021
+Account number 01 D SavingAccount Diposit amount 222.00 Current balance 222.00 Fri Apr 09 21:46:57 EEST 2021
+Account number 01 P requested Account summary Fri Apr 09 21:46:58 EEST 2021
+Account number 01 B went back to accounts screen Fri Apr 09 21:47:02 EEST 2021
+Account number 01 P requested Account summary Fri Apr 09 21:47:05 EEST 2021
+Account number 01 X made a print diposites request Fri Apr 09 21:47:09 EEST 2021
+Account number 01 Y made a print withdrawals request Fri Apr 09 21:47:12 EEST 2021
+Account number 01 Z made a print all customer activities request Fri Apr 09 21:47:16 EEST 2021
+Account number 01 B went back to accounts screen Fri Apr 09 21:47:35 EEST 2021
+Account number 01 Q logout Fri Apr 09 21:47:37 EEST 2021
+Account number 02 A login-Attempt Fri Apr 09 21:47:39 EEST 2021
+Account number 02 L successful-login Fri Apr 09 21:47:42 EEST 2021
+Account number 02 C Accessed checking account Fri Apr 09 21:47:45 EEST 2021
+Account number 02 B went back to accounts screen Fri Apr 09 21:47:48 EEST 2021
+Account number 02 S Accessed saving account Fri Apr 09 21:47:50 EEST 2021
+Account number 02 D SavingAccount Diposit amount 123111.00 Current balance 123111.00 Fri Apr 09 21:47:55 EEST 2021
+Account number 02 P requested Account summary Fri Apr 09 21:48:01 EEST 2021
+Account number 02 B went back to accounts screen Fri Apr 09 21:48:05 EEST 2021
+Account number 02 P requested Account summary Fri Apr 09 21:48:09 EEST 2021
+Account number 02 Z made a print all customer activities request Fri Apr 09 21:48:11 EEST 2021
+Account number 02 B went back to accounts screen Fri Apr 09 21:48:22 EEST 2021
+Account number 02 Q logout Fri Apr 09 21:48:24 EEST 2021
+Account number 03 A login-Attempt Fri Apr 09 21:48:27 EEST 2021
+Account number 03 L successful-login Fri Apr 09 21:48:29 EEST 2021
+Account number 03 C Accessed checking account Fri Apr 09 21:48:30 EEST 2021
+Account number 03 W CheckingAccount Withdrawal amount 0.00 Current balance 0.00 Fri Apr 09 21:48:51 EEST 2021
+Account number 03 D CheckingAccount Diposit amount 120.00 Current balance 120.00 Fri Apr 09 21:48:57 EEST 2021
+Account number 03 W CheckingAccount Withdrawal amount 250.00 Current balance -130.00 Fri Apr 09 21:49:08 EEST 2021
+Account number 03 P requested Account summary Fri Apr 09 21:49:23 EEST 2021
+Account number 03 D CheckingAccount Diposit amount 360.00 Current balance 230.00 Fri Apr 09 21:52:42 EEST 2021
+Account number 03 B went back to accounts screen Fri Apr 09 21:52:44 EEST 2021
+Account number 03 Q logout Fri Apr 09 21:52:45 EEST 2021
+Account number 03 A login-Attempt Fri Apr 09 21:53:18 EEST 2021
+Account number 03 L successful-login Fri Apr 09 21:53:20 EEST 2021
+Account number 03 C Accessed checking account Fri Apr 09 21:53:23 EEST 2021
+Account number 03 D CheckingAccount Diposit amount 0.00 Current balance 230.00 Fri Apr 09 21:53:54 EEST 2021
+Account number 03 P requested Account summary Fri Apr 09 21:53:56 EEST 2021
+Account number 03 B went back to accounts screen Fri Apr 09 21:54:00 EEST 2021
+Account number 03 Q logout Fri Apr 09 21:54:01 EEST 2021

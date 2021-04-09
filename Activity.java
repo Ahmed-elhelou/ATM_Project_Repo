@@ -2,7 +2,6 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
 
 public class Activity {
     protected java.util.Date date;
@@ -15,14 +14,20 @@ public class Activity {
         this.currentNumber = currentNumber;
     }
 
-    public Activity(char type, String currentNumber, String date) throws ParseException {
+    public Activity(char type, String currentNumber, String date){
         this.type = type;
         this.date = stringToDate(date);
         this.currentNumber = currentNumber;
     }
 
-    private Date stringToDate(String s) throws NullPointerException, IllegalArgumentException, ParseException {
-        return new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(s);
+    private Date stringToDate(String s)  {
+        Date sdf = null;
+        try {
+            sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(s);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return sdf;
     }
 
     public char getType() {
@@ -83,7 +88,7 @@ public class Activity {
         return null;
     }
 
-    public static Activity lineToActivity(String s) throws ParseException {
+    public static Activity lineToActivity(String s){
         String[] stringContent = s.split(" ");
         String[] reverseString = new String[6];
         String accountNumber = stringContent[2];

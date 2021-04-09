@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
-import java.text.ParseException;
-import java.security.*;
 
 public class ATM {
 
@@ -25,8 +23,7 @@ public class ATM {
     private BankAccount currentAccount;
     private String currentAccountType;
     private String currentNumber;
-    private String currentPIN;
-    private Scanner input;
+
     private ArrayList<Activity> logArray;
     private File logFile;
     private Activity currentActivity;
@@ -36,7 +33,6 @@ public class ATM {
     public ATM(Bank currentBank, File logFile) {
         this.state = ATM.START;
         this.currentBank = currentBank;
-        this.input = new Scanner(System.in);
         this.logArray = new ArrayList<>();
         this.logFile = logFile;
         this.loadLog();
@@ -58,7 +54,7 @@ public class ATM {
         return this.currentCustomer;
     }
 
-    public void loadLog() {
+    private void loadLog() {
         try (Scanner tempScanner = new Scanner(this.logFile)) {
             while (tempScanner.hasNextLine()) {
                 String s = tempScanner.nextLine();
@@ -67,14 +63,14 @@ public class ATM {
             }
         } catch (FileNotFoundException fEx) {
             fEx.getStackTrace();
-        } catch (ParseException pEx) {
-            pEx.getStackTrace();
+        } catch (Exception ex) {
+            ex.getStackTrace();
         }
         numberOfSavedActivities = logArray.size();
         numberOfNewActivities = 0;
     }
 
-    public void saveLog() {
+    private void saveLog() {
 
         try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(logFile, true))) {
             for (int i = numberOfSavedActivities; i < numberOfSavedActivities + numberOfNewActivities; i++) {
@@ -93,8 +89,7 @@ public class ATM {
     public void start(String currentNumber) {
         this.currentNumber = currentNumber;
         this.setState(ATM.PIN);
-        this.logArray.add(new Activity('A', this.currentNumber));
-        numberOfNewActivities++; // i think to put it in add() method
+        this.addToLogArray(new Activity('A', this.currentNumber));
     }
 
     public boolean pinState(String currentPIN) {
@@ -103,14 +98,12 @@ public class ATM {
             this.setState(ATM.ACCOUNT);
             this.currentNumber = this.currentCustomer.getNumber();
             currentActivity = new Activity('L', this.currentNumber);
-            this.logArray.add(currentActivity);
             this.currentCustomer.addActivity(currentActivity);
-            numberOfNewActivities++;
+            this.addToLogArray(currentActivity);
             return true;
         } else {
             this.setState(ATM.START);
-            this.logArray.add(new Activity('F', this.currentNumber));
-            numberOfNewActivities++;
+            this.addToLogArray(new Activity('F', this.currentNumber));
             return false;
         }
     }
@@ -121,88 +114,83 @@ public class ATM {
             this.currentAccount = this.currentCustomer.getCheckingAcount();
             currentAccountType = ATM.CHECKING;
             this.state = ATM.TRANSACT;
-            this.logArray.add(new Activity('C', this.currentNumber));
-            numberOfNewActivities++;
+            this.addToLogArray(new Activity('C', this.currentNumber));
             break;
         case 'b':
             this.currentAccount = this.currentCustomer.getSavingAcount();
             currentAccountType = ATM.SAVING;
             this.state = ATM.TRANSACT;
-            this.logArray.add(new Activity('S', this.currentNumber));
-            numberOfNewActivities++;
+            this.addToLogArray(new Activity('S', this.currentNumber));
             break;
         case 'c':
             this.state = ATM.SUMMARY;
-            this.logArray.add(new Activity('P', this.currentNumber));
-            numberOfNewActivities++;
+            this.addToLogArray(new Activity('P', this.currentNumber));
+
             break;
         case 'd':
-            this.logArray.add(new Activity('Q', this.currentNumber));
-            numberOfNewActivities++;
+            this.addToLogArray(new Activity('Q', this.currentNumber));
             this.state = ATM.START;
             this.currentCustomer = null;
             this.currentAccount = null;
             this.currentNumber = null;
-            this.currentPIN = null;
             saveLog();
-            this.currentBank.save();
             break;
         }
     }
 
     public void depositState(double ammount) {
         currentAccount.deposits(ammount);
+        this.currentBank.save();
         currentActivity = new Transaction('D', this.currentCustomer, ammount, this.currentAccount.getBalance(),
                 this.currentAccountType);
         this.currentCustomer.addActivity(currentActivity);
-        this.logArray.add(currentActivity);
-
         this.state = ATM.TRANSACT;
-        numberOfNewActivities++;
+        this.addToLogArray(currentActivity);
     }
 
     public void withdrawalsState(double ammount) {
 
         currentAccount.withdrawals(ammount);
+        this.currentBank.save();
         currentActivity = new Transaction('W', this.currentCustomer, ammount, this.currentAccount.getBalance(),
                 this.currentAccountType);
         this.currentCustomer.addActivity(currentActivity);
-        this.logArray.add(currentActivity);
         this.state = ATM.TRANSACT;
-        numberOfNewActivities++;
+        this.addToLogArray(currentActivity);
     }
 
     public ArrayList<Activity> getAccountSummary() {
-        ArrayList<Activity> customerActivity = currentCustomer.getTransactionsList();
+        ArrayList<Activity> customerActivity = currentCustomer.getActivitiesList();
         ArrayList<Activity> result = new ArrayList<>();
         for (Activity element : customerActivity) {
-            if (element.toString().contains(this.currentAccountType + "Account")) { // CheckingAccount
+            if (element.toString().contains(this.currentAccountType)) { // CheckingAccount
 
                 result.add(element);
             }
         }
-        this.logArray.add(new Activity('P', this.currentNumber));
-        numberOfNewActivities++;
+
+        this.addToLogArray(new Activity('P', this.currentNumber));
         return result;
     }
 
     public void backToAccountState() {
 
         this.state = ATM.ACCOUNT;
-        this.logArray.add(new Activity('B', this.currentCustomer.getNumber()));
-        numberOfNewActivities++;
+        this.addToLogArray(new Activity('B', this.currentCustomer.getNumber()));
     }
 
-    public ArrayList<Activity> getLatest(char typeChar, char activityChar) {
-        ArrayList<Activity> customerActivitiesArray = this.currentCustomer.getTransactionsList();
+    public ArrayList<Activity> getLatest(char typeChar) {
+        char activityChar = (typeChar == 'D') ? 'X' : 'Y';
+
+        ArrayList<Activity> customerActivitiesArray = this.currentCustomer.getActivitiesList();
         ArrayList<Activity> result = new ArrayList<>();
         for (int i = 0; i < customerActivitiesArray.size(); i++) {
             if (customerActivitiesArray.get(i).getType() == typeChar) {
                 result.add(customerActivitiesArray.get(i));
             }
         }
-        this.logArray.add(new Activity(activityChar, this.currentCustomer.getNumber()));
-        numberOfNewActivities++;
+
+        this.addToLogArray(new Activity(activityChar, this.currentCustomer.getNumber()));
         return result;
     }
 
@@ -220,7 +208,14 @@ public class ATM {
                 }
             }
         }
+
+        this.addToLogArray(new Activity('Z', this.currentNumber));
         return result;
+    }
+
+    private void addToLogArray(Activity act) {
+        this.numberOfNewActivities++;
+        this.logArray.add(act);
     }
 
 }
